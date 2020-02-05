@@ -69,12 +69,13 @@
             </a>
           </span>
         </li>
-        <li class="list-group-item text-nowrap" ng-repeat="file in torrent.files">
+        <li class="list-group-item text-nowrap" ng-repeat="file in torrent.files | orderBy:'toString()' ">
           <input type="checkbox" ng-model="file.selected" ng-click="select(torrent, file)"/>
           <span class="fa fa-cloud-download"></span>
           <a ng-href="{{ file.link }}?ffmpeg=remux" target="_blank">
             {{ file.name }} ({{ file.length / 1024 / 1024 | number:1 }} MB)
           </a>
+          <a ng-href="{{ file.link }}" target="_blank">[orig]</a>
         </li>
       </ul>
     </div>
