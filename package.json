@@ -7,8 +7,8 @@
     "peerflix-server": "./server/bin.js"
   },
   "scripts": {
-    "start": "pm2 start server.js",
-    "stop": "pm2 stop server.js",
+    "start": "pm2 start ./server/bin.js",
+    "stop": "pm2 stop ./server/bin.js",
     "serve": "node ./server/bin.js",
     "test": "grunt test",
     "prepack": "grunt build"
