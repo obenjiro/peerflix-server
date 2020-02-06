@@ -31,7 +31,8 @@ module.exports = function (req, res, torrent, file) {
       .audioBitrate(128)
       .videoBitrate(1024)
       .outputOptions([
-        //'-threads 2',
+        '-threads 2',
+        '-movflags faststart',
         '-deadline realtime',
         '-error-resilient 1'
       ])
