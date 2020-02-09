@@ -35,6 +35,8 @@ module.exports = function (req, res, torrent, file) {
       .outputOptions([
         '-movflags frag_keyframe+empty_moov',
         '-threads 2',
+        '-crf 27',
+        '-preset veryfast',
         '-deadline realtime',
         '-error-resilient 1'
       ])
