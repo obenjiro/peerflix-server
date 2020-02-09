@@ -25,23 +25,27 @@ module.exports = function (req, res, torrent, file) {
   }
 
   function remux() {
-    res.type('video/webm');
+    res.type('video/mp4');
+    res.setHeader('Content-Length', file.length);
+
     var command = ffmpeg(file.createReadStream())
-      .videoCodec('libvpx').audioCodec('libvorbis').format('webm')
+      .videoCodec('libx264').audioCodec('libmp3lame').format('mp4')
       .audioBitrate(128)
       .videoBitrate(1024)
       .outputOptions([
+        '-movflags frag_keyframe+empty_moov',
         '-threads 2',
-        '-movflags faststart',
         '-deadline realtime',
         '-error-resilient 1'
       ])
       .on('start', function (cmd) {
         console.log(cmd);
       })
-      .on('error', function (err) {
-        console.error(err);
-      });
+      .on('error', function(err, stdout, stderr) {
+        console.log(err.message); //this will likely return "code=1" not really useful
+        console.log("stdout:\n" + stdout);
+        console.log("stderr:\n" + stderr); //this will contain more detailed debugging info
+    })
     pump(command, res);
   }
 

@@ -171,6 +171,7 @@ api.all('/torrents/:infoHash/files/:path([^"]+)', findTorrent, function (req, re
   var range = req.headers.range;
   range = range && rangeParser(file.length, range)[0];
   res.setHeader('Accept-Ranges', 'bytes');
+  res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
   res.type(file.name);
   req.connection.setTimeout(3600000);
 
