@@ -33,7 +33,7 @@ module.exports = function (req, res, torrent, file) {
       .videoBitrate(1024)
       .outputOptions([
         '-threads 8',
-        '-movflags frag_keyframe+empty_moov',
+        '-cpu-used -5',
         '-deadline realtime',
         '-error-resilient 1'
       ])
